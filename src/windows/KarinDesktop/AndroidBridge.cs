@@ -14,6 +14,7 @@ public sealed class AndroidBridge : IDisposable
     public int Port { get; } = 51721;
     public string Token => _token;
     public bool Running => _listener?.IsListening == true;
+    public event Action<string>? CommandReceived;
 
     public AndroidBridge(string sharedFolder) => _sharedFolder = sharedFolder;
 
@@ -50,6 +51,21 @@ public sealed class AndroidBridge : IDisposable
                 {
                     ctx.Response.StatusCode = 401;
                     ctx.Response.Close();
+                    continue;
+                }
+
+                if (path == "/command")
+                {
+                    var command = ctx.Request.QueryString["text"]?.Trim();
+                    if (string.IsNullOrWhiteSpace(command))
+                    {
+                        ctx.Response.StatusCode = 400;
+                        ctx.Response.Close();
+                        continue;
+                    }
+
+                    CommandReceived?.Invoke(command);
+                    await Json(ctx, new { ok = true, accepted = command });
                     continue;
                 }
 
