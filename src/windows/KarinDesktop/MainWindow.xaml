@@ -1,0 +1,159 @@
+<Window x:Class="KarinDesktop.MainWindow"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ Title="KARIN AI Desktop" Width="1440" Height="900"
+ WindowStartupLocation="CenterScreen" Background="#050B12"
+ Foreground="#EAFBFF" FontFamily="Segoe UI">
+ <Window.Resources>
+  <SolidColorBrush x:Key="Ice" Color="#BFEFFF"/>
+  <SolidColorBrush x:Key="Ice2" Color="#6FD5FF"/>
+  <SolidColorBrush x:Key="Panel" Color="#B30B1B28"/>
+  <Style TargetType="Button">
+   <Setter Property="Foreground" Value="#EAFBFF"/>
+   <Setter Property="Background" Value="#221D6A88"/>
+   <Setter Property="BorderBrush" Value="#4D8EDFFF"/>
+   <Setter Property="BorderThickness" Value="1"/>
+   <Setter Property="Padding" Value="14,11"/>
+   <Setter Property="Margin" Value="4"/>
+   <Setter Property="Cursor" Value="Hand"/>
+   <Setter Property="FontSize" Value="14"/>
+  </Style>
+  <Style TargetType="Border" x:Key="Glass">
+   <Setter Property="Background" Value="#B30A1D2C"/>
+   <Setter Property="BorderBrush" Value="#4D8EDFFF"/>
+   <Setter Property="BorderThickness" Value="1"/>
+   <Setter Property="CornerRadius" Value="18"/>
+  </Style>
+ </Window.Resources>
+
+ <Grid Margin="14">
+  <Grid.RowDefinitions>
+   <RowDefinition Height="70"/>
+   <RowDefinition Height="*"/>
+   <RowDefinition Height="96"/>
+  </Grid.RowDefinitions>
+  <Grid.ColumnDefinitions>
+   <ColumnDefinition Width="240"/>
+   <ColumnDefinition Width="*"/>
+   <ColumnDefinition Width="320"/>
+  </Grid.ColumnDefinitions>
+
+  <Border Grid.Row="0" Grid.ColumnSpan="3" Style="{StaticResource Glass}" Padding="20,10">
+   <DockPanel>
+    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+     <Ellipse Width="14" Height="14" Fill="#BFEFFF" Margin="0,0,12,0">
+      <Ellipse.Effect><DropShadowEffect Color="#6FD5FF" BlurRadius="22" ShadowDepth="0"/></Ellipse.Effect>
+     </Ellipse>
+     <TextBlock Text="KARIN AI DESKTOP" FontSize="24" FontWeight="Bold"/>
+     <TextBlock Text="   ICE BLUE • COMMAND CENTER" Foreground="#86B6C8" VerticalAlignment="Center"/>
+    </StackPanel>
+    <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">
+     <Border BorderBrush="#4D8EDFFF" BorderThickness="1" CornerRadius="16" Padding="10,5" Margin="4">
+      <TextBlock x:Name="WakeBadge" Text="WAKE WORD: OFF"/>
+     </Border>
+     <Border BorderBrush="#4D8EDFFF" BorderThickness="1" CornerRadius="16" Padding="10,5" Margin="4">
+      <TextBlock x:Name="BridgeBadge" Text="ANDROID: OFFLINE"/>
+     </Border>
+     <TextBlock x:Name="ClockText" Foreground="#BFEFFF" FontSize="18" VerticalAlignment="Center" Margin="14,0,0,0"/>
+    </StackPanel>
+   </DockPanel>
+  </Border>
+
+  <Border Grid.Row="1" Grid.Column="0" Margin="0,12,12,12" Style="{StaticResource Glass}" Padding="12">
+   <StackPanel>
+    <TextBlock Text="COMMAND CENTER" Foreground="#75A9BE" FontSize="12" Margin="6,4,0,10"/>
+    <Button Content="◉   KARIN Core" Click="Core_Click"/>
+    <Button Content="▦   Applications" Click="Apps_Click"/>
+    <Button Content="⌁   Documents" Click="Documents_Click"/>
+    <Button Content="↔   KARIN Link" Click="Android_Click"/>
+    <Button Content="◷   Routine Center" Click="Routine_Click"/>
+    <Button Content="⚙   Settings" Click="Settings_Click"/>
+    <Separator Margin="0,14"/>
+    <TextBlock Text="VOICE" Foreground="#75A9BE" FontSize="12" Margin="6,4,0,8"/>
+    <Button x:Name="MicButton" Content="🎙 Activate “Karin”" Click="Mic_Click"/>
+    <Button Content="🔊 Speak Demo" Click="SpeakDemo_Click"/>
+   </StackPanel>
+  </Border>
+
+  <Border Grid.Row="1" Grid.Column="1" Margin="0,12,12,12" Style="{StaticResource Glass}" Padding="16">
+   <Grid>
+    <Grid.RowDefinitions><RowDefinition Height="*"/><RowDefinition Height="185"/></Grid.RowDefinitions>
+    <Grid Grid.Row="0">
+     <Ellipse Width="470" Height="470" Stroke="#1F607B" StrokeThickness="1" StrokeDashArray="4,5"/>
+     <Ellipse Width="360" Height="360" Stroke="#6FD5FF" StrokeThickness="1" Opacity=".75"/>
+     <Ellipse Width="280" Height="280" Stroke="#BFEFFF" StrokeThickness="1" Opacity=".35"/>
+     <Border x:Name="AvatarCore" Width="220" Height="220" CornerRadius="110"
+       Background="#12374B" BorderBrush="#BFEFFF" BorderThickness="2"
+       HorizontalAlignment="Center" VerticalAlignment="Center">
+      <Border.Effect><DropShadowEffect Color="#6FD5FF" BlurRadius="42" ShadowDepth="0" Opacity=".85"/></Border.Effect>
+      <Grid>
+       <Ellipse Width="170" Height="170" Fill="#153D52"/>
+       <Ellipse Width="18" Height="7" Fill="#E5FCFF" Margin="0,0,65,25"/>
+       <Ellipse Width="18" Height="7" Fill="#E5FCFF" Margin="65,0,0,25"/>
+       <Border x:Name="Mouth" Width="42" Height="5" CornerRadius="6" Background="#E5FCFF" Margin="0,75,0,0"/>
+       <TextBlock Text="K" FontSize="42" FontWeight="Bold" Foreground="#6FD5FF" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,30,0,0"/>
+      </Grid>
+     </Border>
+     <StackPanel VerticalAlignment="Bottom" Margin="0,0,0,26">
+      <TextBlock Text="KARIN AI CORE" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center"/>
+      <TextBlock x:Name="StatusText" Text="READY • ASK KARIN" Foreground="#8CB6C7" HorizontalAlignment="Center" Margin="0,7,0,0"/>
+     </StackPanel>
+    </Grid>
+    <Grid Grid.Row="1">
+     <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions>
+     <Border Grid.Column="0" Background="#74101F2D" BorderBrush="#284D61" BorderThickness="1" CornerRadius="14" Padding="10" Margin="0,0,6,0">
+      <TextBox x:Name="HistoryBox" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"
+       Foreground="#EAFBFF" Background="Transparent" BorderThickness="0"/>
+     </Border>
+     <Border Grid.Column="1" Background="#74101F2D" BorderBrush="#284D61" BorderThickness="1" CornerRadius="14" Padding="12" Margin="6,0,0,0">
+      <StackPanel>
+       <TextBlock Text="QUICK ACTIONS" Foreground="#75A9BE" FontSize="11"/>
+       <WrapPanel Margin="0,8,0,0">
+        <Button Content="Documents" Click="Documents_Click"/>
+        <Button Content="System Status" Click="SystemStatus_Click"/>
+        <Button Content="Pair Android" Click="Android_Click"/>
+        <Button Content="Rest Notice" Click="Rest_Click"/>
+       </WrapPanel>
+       <TextBlock Text="Contoh: buka dokumen • cari file laporan • status sistem • istirahat"
+        Foreground="#7EA8BA" FontSize="11" TextWrapping="Wrap" Margin="5,8,5,0"/>
+      </StackPanel>
+     </Border>
+    </Grid>
+   </Grid>
+  </Border>
+
+  <Border Grid.Row="1" Grid.Column="2" Margin="0,12,0,12" Style="{StaticResource Glass}" Padding="15">
+   <StackPanel>
+    <TextBlock Text="SYSTEM MONITOR" Foreground="#75A9BE" FontSize="12" Margin="4,4,0,10"/>
+    <TextBlock x:Name="CpuText" Text="CPU —"/>
+    <ProgressBar x:Name="CpuBar" Height="9" Maximum="100" Margin="0,7,0,14"/>
+    <TextBlock x:Name="MemText" Text="MEMORY —"/>
+    <ProgressBar x:Name="MemBar" Height="9" Maximum="100" Margin="0,7,0,16"/>
+    <TextBlock x:Name="ProcText" Text="KARIN PROCESS —" Foreground="#9FD7E8"/>
+    <Separator Margin="0,16"/>
+    <TextBlock Text="ROUTINE CENTER" Foreground="#75A9BE" FontSize="12" Margin="4,4,0,8"/>
+    <TextBlock Text="08:00   Start work" Margin="4"/>
+    <TextBlock Text="12:00   Lunch" Margin="4"/>
+    <TextBlock Text="15:30   Rest 15 min" Margin="4"/>
+    <TextBlock Text="22:30   Stop computer" Margin="4"/>
+    <TextBlock Text="23:00   Sleep" Margin="4"/>
+    <TextBlock Text="06:30   Wake up" Margin="4"/>
+    <Separator Margin="0,16"/>
+    <TextBlock Text="KARIN LINK" Foreground="#75A9BE" FontSize="12" Margin="4,4,0,8"/>
+    <TextBlock x:Name="PairInfo" Text="Not paired" Foreground="#BFEFFF" TextWrapping="Wrap" Margin="4"/>
+    <Button Content="Start PC ↔ Android Bridge" Click="StartBridge_Click"/>
+   </StackPanel>
+  </Border>
+
+  <Border Grid.Row="2" Grid.ColumnSpan="3" Style="{StaticResource Glass}" Padding="10">
+   <Grid>
+    <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+    <TextBox x:Name="CommandBox" Grid.Column="0" FontSize="16" Margin="4"
+     Foreground="#EAFBFF" Background="#88101F2D" BorderBrush="#4D8EDFFF"
+     KeyDown="CommandBox_KeyDown"/>
+    <Button Grid.Column="1" Content="ASK KARIN" Click="Send_Click"/>
+    <Button Grid.Column="2" Content="CLEAR" Click="Clear_Click"/>
+   </Grid>
+  </Border>
+ </Grid>
+</Window>
