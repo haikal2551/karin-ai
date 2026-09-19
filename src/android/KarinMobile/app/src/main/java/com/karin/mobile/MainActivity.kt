@@ -315,7 +315,7 @@ class MainActivity : ComponentActivity() {
         onIp: (String) -> Unit, onToken: (String) -> Unit, onCommand: (String) -> Unit,
         onBack: () -> Unit, onConnect: () -> Unit, onSend: () -> Unit
     ) {
-        Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(18.dp)) {
+        Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(18.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text("KARIN LINK", fontSize = 23.sp, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f), color = Color.White)
                 TextButton(onClick = onBack) { Text("Back") }
