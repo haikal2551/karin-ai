@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.IO;
 using System.Speech.Recognition;
 using System.Speech.Synthesis;
 using System.Windows;
@@ -18,7 +19,6 @@ public partial class MainWindow : Window
     private DateTime _lastCpuTime = DateTime.UtcNow;
     private AndroidBridge? _bridge;
     private bool _wakeOn;
-    private bool _talkState;
 
     public MainWindow()
     {
@@ -52,7 +52,6 @@ public partial class MainWindow : Window
 
     private void AnimateSpeak(bool on)
     {
-        _talkState = on;
         Mouth.Height = on ? 23 : 5;
         Mouth.Width = on ? 30 : 42;
         AvatarCore.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(on ? "#E5FCFF" : "#BFEFFF"));
