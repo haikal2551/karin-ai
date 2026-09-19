@@ -4,13 +4,22 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE"/>
-    <application android:theme="@style/Theme.Karin" android:label="KARIN AI">
-        <activity android:name=".MainActivity" android:exported="true">
+
+    <application
+        android:theme="@style/Theme.Karin"
+        android:label="KARIN AI"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <service android:name=".WakeWordService" android:foregroundServiceType="microphone" android:exported="false"/>
+        <service
+            android:name=".WakeWordService"
+            android:foregroundServiceType="microphone"
+            android:exported="false"/>
     </application>
 </manifest>
