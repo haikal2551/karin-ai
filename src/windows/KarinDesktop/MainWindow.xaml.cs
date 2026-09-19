@@ -252,6 +252,8 @@ public partial class MainWindow : Window
 
         var shared = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
         _bridge = new AndroidBridge(shared);
+        _bridge.CommandReceived += command =>
+            Dispatcher.Invoke(() => Route(command));
 
         try
         {
