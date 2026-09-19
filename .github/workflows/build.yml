@@ -1,0 +1,58 @@
+name: Build KARIN AI
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: src/windows/KarinDesktop
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Restore
+        run: dotnet restore
+      - name: Publish Windows x64
+        run: dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o ../../../publish
+      - name: Install Inno Setup
+        run: choco install innosetup -y
+        working-directory: .
+      - name: Build installer
+        run: '& "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" installer\KARIN_AI.iss'
+        working-directory: .
+      - name: Upload Windows installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: KARIN-AI-Windows-Installer
+          path: installer/output/Setup_KARIN_AI_Desktop.exe
+
+  android:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: src/android/KarinMobile
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.10.2'
+      - name: Build APK
+        run: gradle :app:assembleDebug
+      - name: Rename APK
+        run: cp app/build/outputs/apk/debug/app-debug.apk KARIN_AI_Mobile.apk
+      - name: Upload Android APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: KARIN-AI-Android-APK
+          path: src/android/KarinMobile/KARIN_AI_Mobile.apk
