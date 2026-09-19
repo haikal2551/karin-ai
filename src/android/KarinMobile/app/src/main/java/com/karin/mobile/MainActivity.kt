@@ -90,7 +90,8 @@ class MainActivity : ComponentActivity() {
                     }
                 }
 
-                when (mode) {
+                Box(Modifier.weight(1f)) {
+                    when (mode) {
                     "home" -> HomeScreen(
                         ice, ice2, panel, panel2, muted, connected, voiceOn, status,
                         onVoice = {
@@ -147,6 +148,7 @@ class MainActivity : ComponentActivity() {
                             }
                         }
                     )
+                    }
                 }
 
                 NavigationBar(containerColor = Color(0xFF071A25), tonalElevation = 0.dp) {
@@ -180,7 +182,7 @@ class MainActivity : ComponentActivity() {
         onVoice: () -> Unit, onLink: () -> Unit, onBusiness: () -> Unit, onRoutine: () -> Unit
     ) {
         Column(
-            modifier = Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(horizontal = 18.dp),
+            modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(horizontal = 18.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(Modifier.height(8.dp))
@@ -271,7 +273,7 @@ class MainActivity : ComponentActivity() {
         ice: Color, ice2: Color, panel: Color, muted: Color,
         onBack: () -> Unit, onModule: (String) -> Unit
     ) {
-        Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(18.dp)) {
+        Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(18.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text("BUSINESS WORKSPACE", fontSize = 23.sp, fontWeight = FontWeight.Bold, color = Color.White, modifier = Modifier.weight(1f))
                 TextButton(onClick = onBack) { Text("KARIN Home") }
